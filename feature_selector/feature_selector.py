@@ -538,7 +538,7 @@ class FeatureSelector():
         plt.title('Number of Unique Values Histogram', size = 16);
         
     
-    def plot_collinear(self, plot_all = False):
+    def plot_collinear(self, plot_all = False, ax = None):
         """
         Heatmap of the correlation values. If plot_all = True plots all the correlations otherwise
         plots only those features that have a correlation above the threshold
@@ -567,9 +567,10 @@ class FeatureSelector():
 	                                                list(set(self.record_collinear['drop_feature']))]
 
 	        title = "Correlations Above Threshold"
-
-       
-        f, ax = plt.subplots(figsize=(10, 8))
+		
+        # Set up the matplotlib figure
+        if ax is None:
+            f, ax = plt.subplots(figsize=(10, 8))
         
         # Diverging colormap
         cmap = sns.diverging_palette(220, 10, as_cmap=True)
